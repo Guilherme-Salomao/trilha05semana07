@@ -1,11 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using Semana06.Class;
+using Semana07.Classes;
 
-namespace Semana07.Classes
+
+namespace Semana07.Modulos
 {
     internal class Menu
     {
+        //CRIANDO AS LISTAS
+        private List<Produto> produtosCadastrados;
+        private List<ItemDePedido> itemDePedidos;
+        private ManutencaoItemProduto manutencaoItemProduto;
+        private List<Cliente> clientes;
+        private ManutencaoCliente manutencaoCliente;
+
+        //CONSTRUTOR PARA GERENCIAR A LISTA
+        public Menu()
+        {
+            produtosCadastrados = new List<Produto>();
+            itemDePedidos = new List<ItemDePedido>();
+            clientes = new List<Cliente>();
+
+            // Passando uma referência de Menu
+            manutencaoItemProduto = new ManutencaoItemProduto(this, itemDePedidos, produtosCadastrados);
+            manutencaoCliente = new ManutencaoCliente(this, clientes);
+        }
+
         public void ExibirLogo()
         {
             Console.WriteLine(@"
@@ -16,35 +36,47 @@ namespace Semana07.Classes
 ██████╔╝███████╗██║░╚═╝░██║██║░░██║██║░╚███║██║░░██║  ╚█████╔╝░░██╔╝░░
 ╚═════╝░╚══════╝╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝  ░╚════╝░░░╚═╝░░░");
         }
-
-        //LISTAS CRIADAS
-        private List<ItemDePedido> itemDePedidos = new List<ItemDePedido>();
-
-
         public void ExibirMenu()
         {
             while (true)
             {
                 Console.Clear();
                 ExibirLogo();
-                Console.WriteLine("\nDigite 1 para registrar um Produto");
-                Console.WriteLine("Digite 2 para listar os Produtos");
-                Console.WriteLine("Digite -1 para sair");
+                Console.WriteLine("\nDigite 1 para registrar um Cliente");
+                Console.WriteLine("Digite 2 para listar os Clientes");
+                Console.WriteLine("Digite 3 para registrar um Produto");
+                Console.WriteLine("Digite 4 para listar os Produtos");
+                Console.WriteLine("Digite 0 para sair");
                 Console.Write("\nDigite a sua opção: ");
-                string opcaoEscolhida = Console.ReadLine();
-                int opcaoEscolhidaNumerica = int.Parse(opcaoEscolhida);
 
-                switch (opcaoEscolhidaNumerica)
+                string opcaoEscolhidaStr = Console.ReadLine().Trim(); // Remove espaços em branco extras
+
+                // Verifica se a entrada é válida
+                if (!int.TryParse(opcaoEscolhidaStr, out int opcaoEscolhida))
+                {
+                    Console.WriteLine("Opção inválida. Pressione qualquer tecla para continuar.");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                // Limpa o buffer de entrada depois de ler a opção
+                LimparBufferConsole();
+
+                switch (opcaoEscolhida)
                 {
                     case 1:
-                        ManutencaoItemProduto cadastraProduto = new ManutencaoItemProduto(itemDePedidos);
-                        cadastraProduto.Cadastra();
+                        manutencaoCliente.Cadastra();
                         break;
                     case 2:
-                        ManutencaoItemProduto listaProduto = new ManutencaoItemProduto(itemDePedidos);
-                        listaProduto.Lista();
+                        manutencaoCliente.Listar();
                         break;
-                    case -1:
+                    case 3:
+                        manutencaoItemProduto.Cadastra();
+                        break;
+                    case 4:
+                        manutencaoItemProduto.Lista();
+                        break;
+                    case 0:
                         Console.WriteLine("Tchau tchau :)");
                         return;
                     default:
@@ -55,5 +87,16 @@ namespace Semana07.Classes
             }
         }
 
+        private void LimparBufferConsole()
+        {
+            while (Console.KeyAvailable)
+            {
+                Console.ReadKey(intercept: true); // Lê e descarta a tecla pressionada
+            }
+        }
     }
+
 }
+
+
+

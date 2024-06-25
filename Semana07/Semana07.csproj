@@ -71,9 +71,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\ItemDePedido.cs" />
+    <Compile Include="Classes\ManutencaoCliente.cs" />
+    <Compile Include="Modulos\ItemDePedido.cs" />
     <Compile Include="Classes\ManutencaoItemProduto.cs" />
+    <Compile Include="Classes\ManutencaoPedido.cs" />
     <Compile Include="Classes\ManutencaoProduto.cs" />
+    <Compile Include="Modulos\Pedido.cs" />
+    <Compile Include="Modulos\Cliente.cs" />
+    <Compile Include="Modulos\Endereco.cs" />
     <Compile Include="Modulos\Menu.cs" />
     <Compile Include="Modulos\Produto.cs" />
     <Compile Include="Program.cs" />

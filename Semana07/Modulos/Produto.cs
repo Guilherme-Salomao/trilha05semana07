@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Semana06.Modulos
+namespace Semana07.Modulos
 {
     internal class Produto
     {

@@ -1,29 +1,30 @@
-﻿using Semana06.Modulos;
-using Semana07.Classes;
+﻿using Semana07.Modulos;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Semana06.Class
+
+namespace Semana07.Classes
 {
-    internal class ManutencaoItemProduto : Menu
+    internal class ManutencaoItemProduto
     {
-        //CRIANÇÃO DA LISTA
         private List<ItemDePedido> itemDePedidos;
+        private List<Produto> produtosCadastrados;
+        // Adicionando Menu como dependência para ter apenas uma lista
+        private Menu menu; 
 
-        //CONSTRUTOR
-        public ManutencaoItemProduto(List<ItemDePedido> itemDePedidos)
+        public ManutencaoItemProduto(Menu menu, List<ItemDePedido> itemDePedidos, List<Produto> produtosCadastrados)
         {
+            this.menu = menu;
             this.itemDePedidos = itemDePedidos ?? new List<ItemDePedido>();
+            this.produtosCadastrados = produtosCadastrados ?? new List<Produto>();
         }
 
         public void Cadastra()
         {
             Console.Clear();
-            ExibirLogo();
+            menu.ExibirLogo();
             Console.WriteLine("\nDigite o nome do produto: ");
-            string nomeProduto = Console.ReadLine();      
+            string nomeProduto = Console.ReadLine();
             Console.WriteLine("Digite a quantidade: ");
             string quantidadeProdutoStr = Console.ReadLine();
             int quantidadeProduto = int.Parse(quantidadeProdutoStr);
@@ -41,15 +42,18 @@ namespace Semana06.Class
         public void Lista()
         {
             Console.Clear();
-            ExibirLogo();
+            menu.ExibirLogo();
             Console.WriteLine("\nProdutos cadastrados:\n");
             itemDePedidos.ForEach(p => Console.WriteLine($"{p.Nome} - {p.Quantidade} - {p.PrecoUnitario:C} - {p.Subtotal:C}"));
             Console.WriteLine("\nAperte qualquer tecla para voltar!");
             Console.ReadKey();
             Console.Clear();
-            ExibirLogo();
-            ExibirMenu();
+            menu.ExibirLogo();
+            menu.ExibirMenu();
         }
 
     }
 }
+
+
+
