@@ -13,6 +13,7 @@ namespace Semana07.Modulos
         private ManutencaoItemProduto manutencaoItemProduto;
         private List<Cliente> clientes;
         private ManutencaoCliente manutencaoCliente;
+        private ManutencaoPedido manutencaoPedido;
 
         //CONSTRUTOR PARA GERENCIAR A LISTA
         public Menu()
@@ -24,6 +25,7 @@ namespace Semana07.Modulos
             // Passando uma referência de Menu
             manutencaoItemProduto = new ManutencaoItemProduto(this, itemDePedidos, produtosCadastrados);
             manutencaoCliente = new ManutencaoCliente(this, clientes);
+            manutencaoPedido = new ManutencaoPedido(this, itemDePedidos, clientes);
         }
 
         public void ExibirLogo()
@@ -82,10 +84,10 @@ namespace Semana07.Modulos
                             manutencaoItemProduto.Lista();
                             break;
                         case 5:
-                            
+                            manutencaoPedido.CriarPedido(itemDePedidos, clientes);
                             break;
                         case 6:
-                            
+                            manutencaoPedido.ListarPedidos();
                             break;
                         default:
                             Console.WriteLine("Opção inválida. Escolha o número referente o que deseja realizar.");

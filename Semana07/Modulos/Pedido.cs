@@ -9,25 +9,27 @@ namespace Semana07.Modulos
         public Cliente Cliente { get; set; }
         public DateTime Data { get; set; }
         public List<ItemDePedido> Itens { get; set; }
+        private decimal total;
+
         public decimal Total
         {
             get
             {
-                decimal total = 0;
-                foreach (var item in Itens)
-                {
-                    total += item.Subtotal; // Supondo que ItemDePedido tenha uma propriedade Subtotal
-                }
                 return total;
             }
         }
+
         public Pedido(Cliente cliente, DateTime data, List<ItemDePedido> itens)
         {
             Cliente = cliente;
             Data = data;
             Itens = itens ?? new List<ItemDePedido>();
+            total = 0;
+            foreach (var item in Itens)
+            {
+                total += item.Subtotal;
+            }
         }
-
 
         public void ExibirPedido()
         {
@@ -44,11 +46,13 @@ namespace Semana07.Modulos
         public void AdicionarItem(ItemDePedido item)
         {
             Itens.Add(item);
+            total += item.Subtotal;
         }
 
         public void RemoverItem(ItemDePedido item)
         {
             Itens.Remove(item);
+            total -= item.Subtotal;
         }
     }
 }
