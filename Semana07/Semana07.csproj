@@ -75,7 +75,6 @@
     <Compile Include="Modulos\ItemDePedido.cs" />
     <Compile Include="Classes\ManutencaoItemProduto.cs" />
     <Compile Include="Classes\ManutencaoPedido.cs" />
-    <Compile Include="Classes\ManutencaoProduto.cs" />
     <Compile Include="Modulos\Pedido.cs" />
     <Compile Include="Modulos\Cliente.cs" />
     <Compile Include="Modulos\Endereco.cs" />

@@ -36,9 +36,11 @@ namespace Semana07.Modulos
 ██████╔╝███████╗██║░╚═╝░██║██║░░██║██║░╚███║██║░░██║  ╚█████╔╝░░██╔╝░░
 ╚═════╝░╚══════╝╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝  ░╚════╝░░░╚═╝░░░");
         }
+
+        Boolean menu = true;
         public void ExibirMenu()
         {
-            while (true)
+            while (menu)
             {
                 Console.Clear();
                 ExibirLogo();
@@ -46,6 +48,8 @@ namespace Semana07.Modulos
                 Console.WriteLine("Digite 2 para listar os Clientes");
                 Console.WriteLine("Digite 3 para registrar um Produto");
                 Console.WriteLine("Digite 4 para listar os Produtos");
+                Console.WriteLine("Digite 5 para registrar um Pedido");
+                Console.WriteLine("Digite 6 para listar os Pedidos");
                 Console.WriteLine("Digite 0 para sair");
                 Console.Write("\nDigite a sua opção: ");
 
@@ -54,46 +58,44 @@ namespace Semana07.Modulos
                 // Verifica se a entrada é válida
                 if (!int.TryParse(opcaoEscolhidaStr, out int opcaoEscolhida))
                 {
-                    Console.WriteLine("Opção inválida. Pressione qualquer tecla para continuar.");
+                    Console.WriteLine("Opção inválida. Digite apenas números referentes ao menu !");
                     Console.ReadKey();
-                    continue;
                 }
-
-                // Limpa o buffer de entrada depois de ler a opção
-                LimparBufferConsole();
-
-                switch (opcaoEscolhida)
+                else
                 {
-                    case 1:
-                        manutencaoCliente.Cadastra();
-                        break;
-                    case 2:
-                        manutencaoCliente.Listar();
-                        break;
-                    case 3:
-                        manutencaoItemProduto.Cadastra();
-                        break;
-                    case 4:
-                        manutencaoItemProduto.Lista();
-                        break;
-                    case 0:
-                        Console.WriteLine("Tchau tchau :)");
-                        return;
-                    default:
-                        Console.WriteLine("Opção inválida");
-                        Console.ReadKey();
-                        break;
+                    switch (opcaoEscolhida)
+                    {
+                        case 0:
+                            Console.WriteLine("Tchau tchau :)");
+                            menu = false;
+                            break;
+                        case 1:
+                            manutencaoCliente.Cadastra();
+                            break;
+                        case 2:
+                            manutencaoCliente.Listar();
+                            break;
+                        case 3:
+                            manutencaoItemProduto.Cadastra();
+                            break;
+                        case 4:
+                            manutencaoItemProduto.Lista();
+                            break;
+                        case 5:
+                            
+                            break;
+                        case 6:
+                            
+                            break;
+                        default:
+                            Console.WriteLine("Opção inválida. Escolha o número referente o que deseja realizar.");
+                            Console.ReadKey();
+                            break;
+                    }
                 }
             }
         }
 
-        private void LimparBufferConsole()
-        {
-            while (Console.KeyAvailable)
-            {
-                Console.ReadKey(intercept: true); // Lê e descarta a tecla pressionada
-            }
-        }
     }
 
 }

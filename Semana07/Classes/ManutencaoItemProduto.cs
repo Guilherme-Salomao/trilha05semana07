@@ -7,6 +7,7 @@ namespace Semana07.Classes
 {
     internal class ManutencaoItemProduto
     {
+        // Recuperando as listas
         private List<ItemDePedido> itemDePedidos;
         private List<Produto> produtosCadastrados;
         // Adicionando Menu como dependência para ter apenas uma lista
